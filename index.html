@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mystic Age Guesser</title>
+  </head>
+  <body>
+    <script>
+      const WELCOME_MESSAGE =
+        "Welcome to the Mystic Age Guesser! Please enter your name to begin";
+      let userName = prompt(WELCOME_MESSAGE);
+      while (!userName) {
+        userName = prompt(WELCOME_MESSAGE);
+      }
+
+      alert(
+        `Hey ${userName}! Let's play a game. I have mystical powers to guess your age in under 7 attempts!`
+      );
+
+      let lowerAgeBoundary = 1;
+      let upperAgeBoundary = 122;
+      let didGuessCorrectly = false;
+
+      //main game loop
+      while (didGuessCorrectly === false) {
+        if (lowerAgeBoundary > upperAgeBoundary) {
+          alert(
+            `Hey ${userName}, it seems like there is some magic disturbance... Refresh the page to play again.`
+          );
+        }
+
+        let guess = Math.floor((lowerAgeBoundary + upperAgeBoundary) / 2);
+
+        let userResponseToGuess = null;
+
+        while (userResponseToGuess !== "y" && userResponseToGuess !== "n") {
+          userResponseToGuess = prompt(
+            `Is your age ${guess}? Please enter y for yes or n for no`
+          );
+        }
+
+        didGuessCorrectly = userResponseToGuess === "y";
+
+        if (didGuessCorrectly === false) {
+          let userResponseToOlderYounger = null;
+
+          // 1:older 2:younger
+
+          while (
+            userResponseToOlderYounger !== "1" &&
+            userResponseToOlderYounger !== "2"
+          ) {
+            userResponseToOlderYounger = prompt(
+              `Are you older or younger than ${guess}? Enter 1 for older or 2 for younger.`
+            );
+          }
+
+          if (userResponseToOlderYounger === "1") {
+            lowerAgeBoundary = guess + 1;
+          } else {
+            upperAgeBoundary = guess - 1;
+          }
+        }
+      }
+
+      alert("Please refresh the page to play again!");
+    </script>
+  </body>
+</html>
